@@ -7,9 +7,23 @@ pipeline {
       }
     }
     stage('build') {
-      agent any
-      steps {
-        bat 'ping localhost'
+      parallel {
+        stage('build') {
+          agent any
+          steps {
+            bat 'ping localhost'
+          }
+        }
+        stage('Module1') {
+          steps {
+            bat 'ping localhost'
+          }
+        }
+        stage('Module2') {
+          steps {
+            bat 'ping localhost'
+          }
+        }
       }
     }
     stage('deploy_Dev') {
@@ -22,9 +36,14 @@ pipeline {
         bat 'ping localhost'
       }
     }
-    stage('confirmation') {
+    stage('deploy_PROD') {
       steps {
-        input(message: 'Deploy to Prod ?', id: 'dec1', ok: 'yes', submitter: 'Yes, No', submitterParameter: 'rY, rY')
+        bat 'ping localhost'
+      }
+    }
+    stage('Notify') {
+      steps {
+        mail(subject: 'Blue Ocean Pipeline', body: 'Build deployed successfully from Blue Ocean.', from: 'External.Pallavi.Hartalkar@Kuehne-Nagel.com', to: 'External.Pallavi.Hartalkar@Kuehne-Nagel.com')
       }
     }
   }
