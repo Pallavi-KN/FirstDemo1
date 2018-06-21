@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    node {
-      label 'mylocal'
-    }
-
-  }
+  agent any
   stages {
     stage('Init') {
       steps {
@@ -12,10 +7,9 @@ pipeline {
       }
     }
     stage('build') {
+      agent any
       steps {
-        sh '''cd C:\\Users\\External.Pallavi.Har\\GitRepo\\FirstDemoLocal\\FirstDemo
-mvn clean install
-'''
+        bat 'ping localhost'
       }
     }
   }
