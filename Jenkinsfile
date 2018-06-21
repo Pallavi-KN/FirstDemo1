@@ -41,10 +41,5 @@ pipeline {
         bat 'ping localhost'
       }
     }
-    stage('Notify') {
-      steps {
-        mail(subject: 'Blue Ocean Pipeline', body: 'Build deployed successfully from Blue Ocean.', from: 'External.Pallavi.Hartalkar@Kuehne-Nagel.com', to: 'External.Pallavi.Hartalkar@Kuehne-Nagel.com')
-      }
-    }
   }
 }
